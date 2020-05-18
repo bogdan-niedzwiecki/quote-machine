@@ -1,0 +1,14 @@
+@import "~bootstrap/scss/bootstrap";
+
+.wrapper {
+  padding: 1rem;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.smooth {
+  transition: all 1s;
+}
