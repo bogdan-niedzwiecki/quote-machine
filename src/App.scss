@@ -6,8 +6,21 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: 'Raleway', sans-serif;
 }
 
+.card {
+  width: 500px;
+}
+
+.blockquote {
+  font-size: 24px;
+  font-weight: 500;
+
+  &-footer {
+    font-weight: 400;
+  }
+}
 
 .smooth {
   transition: all 1s;

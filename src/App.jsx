@@ -7,17 +7,14 @@ import './App.scss';
 
 class App extends Component {
   state = {
-    text: "",
+    quotes: [],
+    quote: "",
     author: "",
     color: ""
   }
 
   componentDidMount() {
-    this.getQuote()
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return this.state.text !== nextState.text;
+    this.getQuotes()
   }
 
   getRandomColor() {
@@ -29,11 +26,15 @@ class App extends Component {
     return color;
   }
 
-  getQuote() {
-    return fetch("https://api.forismatic.com/api/1.0/?method=getQuote&format=json&lang=en")
+  getQuotes() {
+    return fetch("https://gist.githubusercontent.com/camperbot/5a022b72e96c4c9585c32bf6a75f62d9/raw/e3c6895ce42069f0ee7e991229064f167fe8ccdc/quotes.json")
       .then(response => response.json())
-      .then(r => this.setState({ text: r.quoteText, author: r.quoteAuthor, color: this.getRandomColor() }))
-      .catch(error => console.error(error))
+      .then(r => this.setState({ quotes: r.quotes }, this.generateQuote))
+  }
+
+  generateQuote() {
+    let index = Math.floor(Math.random() * Math.floor(this.state.quotes.length));
+    return this.setState(state => ({ author: state.quotes[index].author, quote: state.quotes[index].quote, color: this.getRandomColor() }))
   }
 
   tweet() {
@@ -43,20 +44,21 @@ class App extends Component {
   render() {
     return (
       <div className="wrapper smooth" style={{ backgroundColor: this.state.color }}>
-        <Card style={{ width: 600, color: this.state.color }}>
+        <Card style={{ color: this.state.color }}>
           <Card.Body>
             <blockquote className="blockquote mb-0 text-center">
-              <p className="smooth"><FontAwesomeIcon icon={faQuoteLeft} size="lg" className="mr-3 d-inline" />{this.state.text}</p>
-              <footer className="blockquote-footer text-right smooth" style={{ color: this.state.color }}>{this.state.author || 'Anonymous'}</footer>
+              <p className="smooth"><FontAwesomeIcon icon={faQuoteLeft} size="md" className="mr-3 d-inline" />{this.state.quote}</p>
+              <footer className="blockquote-footer text-right smooth" style={{ color: this.state.color }}>{this.state.author || 'Unknown'}</footer>
             </blockquote>
-            <Button className="float-left mt-3 border-0 smooth" onClick={() => this.tweet()} style={{ backgroundColor: this.state.color }}><FontAwesomeIcon icon={faTwitter} size="lg" /></Button>
-            <Button className="float-right mt-3 border-0 smooth" onClick={() => this.getQuote()} style={{ backgroundColor: this.state.color }}>Generate Quote</Button>
+            <div className="button-wrapper">
+              <Button className="float-left mt-3 border-0 smooth" title="Tweet this quote!" onClick={() => this.tweet()} style={{ backgroundColor: this.state.color }}><FontAwesomeIcon icon={faTwitter} size="lg" /></Button>
+              <Button className="float-right mt-3 border-0 smooth" onClick={() => this.generateQuote()} style={{ backgroundColor: this.state.color }}>New Quote</Button>
+            </div>
           </Card.Body>
         </Card>
       </ div>
     );
   }
-
 }
 
 export default App;
