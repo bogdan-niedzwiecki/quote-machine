@@ -38,7 +38,7 @@ class App extends Component {
   }
 
   tweet() {
-    window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent('"' + this.state.text + '" —' + this.state.author));
+    window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent('"' + this.state.quote + '" —' + this.state.author));
   }
 
   render() {
@@ -47,7 +47,7 @@ class App extends Component {
         <Card style={{ color: this.state.color }}>
           <Card.Body>
             <blockquote className="blockquote mb-0 text-center">
-              <p className="smooth"><FontAwesomeIcon icon={faQuoteLeft} size="md" className="mr-3 d-inline" />{this.state.quote}</p>
+              <p className="smooth"><FontAwesomeIcon icon={faQuoteLeft} size="lg" className="mr-3 d-inline" />{this.state.quote}</p>
               <footer className="blockquote-footer text-right smooth" style={{ color: this.state.color }}>{this.state.author || 'Unknown'}</footer>
             </blockquote>
             <div className="button-wrapper">
