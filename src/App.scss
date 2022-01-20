@@ -1,0 +1,94 @@
+.wrapper {
+  padding: 1rem;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Raleway", sans-serif;
+  transition: background-color 2s;
+  position: relative;
+  box-sizing: border-box;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(0, 0, 0, 0.2) 80%
+    );
+  }
+}
+
+.card {
+  width: 500px;
+  padding: 10px 5px 20px;
+  border-radius: 10px;
+  backdrop-filter: blur(3px);
+  transition: opacity 0.5s;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.075) 0%,
+    rgba(0, 0, 0, 0.075) 100%
+  );
+  box-shadow: inset 1px 1px 5px 0px rgba(255, 255, 255, 0.2),
+    inset -1px -1px 5px 0px rgba(0, 0, 0, 0.2),
+    40px 40px 40px -20px rgba(0, 0, 0, 0.05);
+
+  opacity: 1;
+
+  &-fade {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+.icon {
+  margin-right: 10px;
+  margin-bottom: 5px;
+  filter: drop-shadow(0px 0px 1px white);
+}
+
+.blockquote {
+  text-shadow: 0px 0px 2px white;
+  color: white;
+  opacity: 0.85;
+  font-size: 24px;
+  mix-blend-mode: luminosity;
+
+  &-footer {
+    font-weight: 500;
+  }
+}
+
+.button-wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 40px 20px;
+}
+
+.button {
+  width: 50px;
+  height: 50px;
+  background: rgba(0, 0, 0, 0);
+  border-radius: 10px;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1),
+    -2px -2px 6px rgba(255, 255, 255, 0.1);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: white;
+  opacity: 0.85;
+  cursor: pointer;
+
+  svg {
+    filter: drop-shadow(0px 0px 1px white);
+  }
+}
