@@ -49,15 +49,20 @@ class App extends Component {
   }
 
   getQuotes() {
-    return fetch('/.netlify/functions/quotes')
+    return fetch(
+      "https://gist.githubusercontent.com/camperbot/5a022b72e96c4c9585c32bf6a75f62d9/raw/e3c6895ce42069f0ee7e991229064f167fe8ccdc/quotes.json"
+    )
       .then((response) => response.json())
-      .then((r) => this.setState({ quotes: r.quotes }, this.generateQuote));
+      .then((r) => {
+        console.log(r);
+        this.setState({ quotes: r.quotes }, this.generateQuote);
+      });
   }
 
   generateQuote = (click) => {
     this.generateCord();
 
-    let index = Math.floor(
+    const index = Math.floor(
       Math.random() * Math.floor(this.state.quotes.length)
     );
 
@@ -85,12 +90,12 @@ class App extends Component {
   tweet = () => {
     window.open(
       "https://twitter.com/intent/tweet?text=" +
-      encodeURIComponent('"' + this.state.quote + '" —' + this.state.author)
+        encodeURIComponent('"' + this.state.quote + '" —' + this.state.author)
     );
   };
 
   generateCord = () => {
-    let arr = this.state.balls.map((ball) => {
+    const arr = this.state.balls.map((ball) => {
       const x = Math.floor(Math.random() * 51 + 25);
       const y = Math.floor(Math.random() * 51 + 25);
       const size = Math.floor(Math.random() * 3 + 1);
@@ -105,7 +110,8 @@ class App extends Component {
   };
 
   render() {
-    let card = `card${this.state.isCardHidden ? " card-fade" : ""}`;
+    const  card = `card${this.state.isCardHidden ? " card-fade" : ""}`;
+    
     return (
       <div className="wrapper" style={{ backgroundColor: this.state.color }}>
         {this.state.balls.map((ball) => (
